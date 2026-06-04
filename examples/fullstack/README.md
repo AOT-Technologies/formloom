@@ -76,36 +76,52 @@ if (!zodResult.success) {
 
 This means a malicious client that bypasses the hook (submitting via curl, say) still can't smuggle bad data into the LLM's context. The validation contract is the schema itself.
 
+## Prerequisites
+
+- **Node.js 20+** and **pnpm 9.11.0** — the repo pins pnpm via the `packageManager` field, so running `corepack enable` once lets Corepack pick the right version up automatically.
+- An **OpenAI API key** with access to the model this example calls. It uses **GPT-5.2** via LangChain's Responses API; change the model in [server/chat.ts](server/chat.ts) if you need a different one.
+
 ## Setup
 
-### 1. Get an OpenAI API key
+### 1. Clone the repo
 
 ```bash
-cp .env.example .env
+git clone https://github.com/formloom/formloom.git
+cd formloom
 ```
 
-Edit `.env`:
+### 2. Add your OpenAI API key
+
+From the repo root, copy the example's env file:
+
+```bash
+cp examples/fullstack/.env.example examples/fullstack/.env
+```
+
+Then edit `examples/fullstack/.env` and set your key:
 
 ```
 OPENAI_API_KEY=sk-your-key-here
 ```
 
-### 2. Install and build
+### 3. Install and build
 
 From the repo root:
 
 ```bash
-pnpm install
-pnpm build
+pnpm install   # install workspace deps (once)
+pnpm build     # build the Formloom packages this example imports
 ```
 
-### 3. Run
+### 4. Run
+
+From the repo root:
 
 ```bash
 pnpm --filter @formloom/example-fullstack dev
 ```
 
-Starts both the Express server (port 3001) and the Vite dev server concurrently. Opens at `http://localhost:5173`.
+This starts the Express API (port `3001`) and the Vite dev server (port `5173`) concurrently. Open `http://localhost:5173`.
 
 Try messages like:
 

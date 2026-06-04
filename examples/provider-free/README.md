@@ -13,21 +13,29 @@ An offline demo that exercises every Formloom LLM integration path without calli
 - v1.2 schema features flowing through every path: option descriptions, `allowCustom` on radio + multi-select, `hints.variant`, `readOnly`
 - **v1.3 `createFormloomCapabilities`** narrowing the prompt + tool JSON Schema + parser for a surface. Preset picker shows how `Full`, `Text-only`, and `No-file / no-conditional` each shrink the prompt and tighten the tool schema in real time.
 
+## Prerequisites
+
+- **Node.js 20+** and **pnpm 9.11.0** — the repo pins pnpm via the `packageManager` field, so running `corepack enable` once lets Corepack pick the right version up automatically.
+- No API key and no network needed: the LLM responses are simulated, so the example runs fully offline.
+
 ## How to run
 
-From the repo root:
+Clone the repo, then from its root:
 
 ```bash
-pnpm install
-pnpm build
-pnpm --filter @formloom/example-provider-free dev
+git clone https://github.com/formloom/formloom.git
+cd formloom
+
+pnpm install                                       # install workspace deps (once)
+pnpm build                                         # build the packages this example imports
+pnpm --filter @formloom/example-provider-free dev  # start the Vite dev server
 ```
 
-Opens at `http://localhost:5173`.
+Then open `http://localhost:5173`.
 
 ## Pickers
 
-- **Schema** — pick one of three hand-rolled schemas (jobApplication, appointmentBooking, contactPreferences, crmOnboarding).
+- **Schema** — pick one of four hand-rolled schemas (jobApplication, appointmentBooking, contactPreferences, crmOnboarding).
 - **Path** — which LLM integration path to simulate.
 - **Caps** — which capability profile to apply. Full = v1.2 default, Text-only = every other field type becomes a validation error through `bundle.parse`, No-file / no-conditional = `file` fields and `showIf` are both rejected.
 

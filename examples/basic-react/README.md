@@ -17,17 +17,25 @@ Every feature in `@formloom/schema` and `@formloom/react` that doesn't require a
 - Async validators (debounced, abortable) — exercised by the "Async" schema
 - File uploads via `adaptFileList`
 
+## Prerequisites
+
+- **Node.js 20+** and **pnpm 9.11.0** — the repo pins pnpm via the `packageManager` field, so running `corepack enable` once lets Corepack pick the right version up automatically.
+- No API key and no network needed: every schema is hardcoded, so the example runs fully offline.
+
 ## How to run
 
-From the repo root:
+Clone the repo, then from its root:
 
 ```bash
-pnpm install
-pnpm build
-pnpm --filter @formloom/example-basic-react dev
+git clone https://github.com/formloom/formloom.git
+cd formloom
+
+pnpm install                                     # install workspace deps (once)
+pnpm build                                       # build the packages this example imports
+pnpm --filter @formloom/example-basic-react dev  # start the Vite dev server
 ```
 
-Opens at `http://localhost:5173`.
+Then open `http://localhost:5173`.
 
 ## How it works
 
